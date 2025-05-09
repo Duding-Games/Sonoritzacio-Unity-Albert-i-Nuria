@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Water
+  - WaterSteps
+  - GrassSteps
+  - MudSteps
+  - CornSteps
   layers:
   - Default
   - TransparentFX
