@@ -17,7 +17,7 @@ public class RiverSoundController : MonoBehaviour
 
             float volume = Mathf.Clamp01(1 - (distance / maxDistance));
 
-            audioSource.volume = Mathf.Clamp01(volume * 0.1f);
+            audioSource.volume = Mathf.Clamp01(volume * 0.03f);
         }
     }
 
