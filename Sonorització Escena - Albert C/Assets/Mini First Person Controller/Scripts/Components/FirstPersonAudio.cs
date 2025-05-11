@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class FirstPersonAudio : MonoBehaviour
 {
@@ -31,6 +32,13 @@ public class FirstPersonAudio : MonoBehaviour
     public Crouch crouch;
     public AudioSource crouchStartAudio, crouchedAudio, crouchEndAudio;
     public AudioClip[] crouchStartSFX, crouchEndSFX;
+
+    [Header("Audio Mixer")]
+    public AudioMixer audioMixer;
+
+    [Header("Snapshots")]
+    public AudioMixerSnapshot defaultSnapshot;
+    public AudioMixerSnapshot waterSnapshot;
 
     AudioSource[] MovingAudios => new AudioSource[] { stepAudio, runningAudio, crouchedAudio, grassStepAudio, waterStepAudio, mudStepAudio, cornStepAudio };
 
@@ -75,10 +83,12 @@ public class FirstPersonAudio : MonoBehaviour
             if (crouch && crouch.IsCrouched)
             {
                 SetPlayingMovingAudio(crouchedAudio);
+                defaultSnapshot?.TransitionTo(0.2f); // Mantén el snapshot por defecto
             }
             else if (character.IsRunning)
             {
                 SetPlayingMovingAudio(runningAudio);
+                defaultSnapshot?.TransitionTo(0.2f);
             }
             else
             {
@@ -87,18 +97,23 @@ public class FirstPersonAudio : MonoBehaviour
                 {
                     case "GrassSteps":
                         SetPlayingMovingAudio(grassStepAudio);
+                        defaultSnapshot?.TransitionTo(0.2f);
                         break;
                     case "WaterSteps":
                         SetPlayingMovingAudio(waterStepAudio);
+                        waterSnapshot?.TransitionTo(0.2f);
                         break;
                     case "MudSteps":
                         SetPlayingMovingAudio(mudStepAudio);
+                        defaultSnapshot?.TransitionTo(0.2f);
                         break;
                     case "CornSteps":
                         SetPlayingMovingAudio(cornStepAudio);
+                        defaultSnapshot?.TransitionTo(0.2f);
                         break;
                     default:
                         SetPlayingMovingAudio(stepAudio);
+                        defaultSnapshot?.TransitionTo(0.2f);
                         break;
                 }
             }
@@ -106,6 +121,7 @@ public class FirstPersonAudio : MonoBehaviour
         else
         {
             SetPlayingMovingAudio(null);
+            defaultSnapshot?.TransitionTo(0.2f);
         }
 
         lastCharacterPosition = CurrentCharacterPosition;

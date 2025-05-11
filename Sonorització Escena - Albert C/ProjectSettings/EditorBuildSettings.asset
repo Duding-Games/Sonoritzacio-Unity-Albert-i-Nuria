@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Escena Sonoritzada.unity
+    guid: ed8daf6e37dc44642be598c4f9d41dcd
   m_configObjects: {}
